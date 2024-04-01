@@ -1,6 +1,7 @@
 package com.orderproduct.course.entities;
 
 import ch.qos.logback.core.net.server.Client;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -14,21 +15,28 @@ public class Order implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private Instant moment;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
 
-    public Order(){
+    public Order() {
+    }
 
+    public Order(Long id, Instant moment, User client) {
+        super();
+        this.id = id;
+        this.moment = moment;
+        this.client = client;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
