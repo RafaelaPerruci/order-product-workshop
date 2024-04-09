@@ -21,7 +21,9 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
+    @ManyToMany                                               //chave estrangeira
+    @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id")) //a outra chave estrangeira
     private Set<Category> categories = new HashSet<>(); //a instanciação serve pra o Setb não começar valendo null mas sim vazio
 
     public Product(){
