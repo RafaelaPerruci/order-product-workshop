@@ -1,5 +1,6 @@
 package com.orderproduct.course.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -25,6 +26,9 @@ public class Product implements Serializable {
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"),
     inverseJoinColumns = @JoinColumn(name = "category_id")) //a outra chave estrangeira
     private Set<Category> categories = new HashSet<>(); //a instanciação serve pra o Setb não começar valendo null mas sim vazio
+
+    @OneToMany(mappedBy = "id.product")
+    Set<OrderItem> items = new HashSet<>();
 
     public Product(){
 
@@ -82,6 +86,14 @@ public class Product implements Serializable {
         return categories;
     }
 
+    @JsonIgnore
+    public Set<Order> getOrders(){
+        Set<Order> set = new HashSet<>();
+        for (OrderItem o : items){
+            set.add(o.getOrder());
+        }
+        return set;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

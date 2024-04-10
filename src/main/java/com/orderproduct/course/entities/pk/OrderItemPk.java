@@ -1,12 +1,15 @@
 package com.orderproduct.course.entities.pk;
 
 import com.orderproduct.course.entities.Order;
+import com.orderproduct.course.entities.OrderItem;
 import com.orderproduct.course.entities.Product;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Embeddable
 public class OrderItemPk {
@@ -36,6 +39,7 @@ public class OrderItemPk {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 
     @Override
     public boolean equals(Object o) {
