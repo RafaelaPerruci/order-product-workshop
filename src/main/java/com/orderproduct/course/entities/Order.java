@@ -1,6 +1,7 @@
 package com.orderproduct.course.entities;
 
 import ch.qos.logback.core.net.server.Client;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.orderproduct.course.entities.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -19,6 +20,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
     private Integer status;
     @ManyToOne
